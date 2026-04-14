@@ -1,0 +1,99 @@
+name: Feature request
+description: Suggest a new feature or improvement
+body:
+  - type: dropdown
+    id: platform
+    attributes:
+      label: "Stremio Platform"
+      description: "Select the Stremio Platform the request applies to"
+      options:
+        - All Platforms
+        - Windows
+        - Windows (Beta)
+        - macOS
+        - Linux
+        - Linux (Beta)
+        - Web
+        - Android Mobile
+        - Android Mobile Beta
+        - Android TV
+        - Android TV Beta
+        - Samsung TV (Tizen)
+        - LG TV (webOS)
+        - Hisense TV (VIDAA)
+        - Meta Quest VR
+        - Pico VR
+        - Raspberry Pi v4 (RPI4)
+        - Raspberry Pi v5 (RPI5)
+        - Steam Deck
+        - iOS / iPadOS / macOS Native Beta
+        - tvOS Beta
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: "Is your feature request related to a problem?"
+      description: "A clear and concise description of what the problem is."
+      placeholder: "Ex. I'm always frustrated when [...]"
+
+  - type: textarea
+    id: describe_feature
+    attributes:
+      label: "Describe the feature you'd like"
+      description: "A clear and concise description of what you want to happen."
+      placeholder: "Describe the feature in detail..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_cases
+    attributes:
+      label: "Use cases"
+      description: "How would you use this feature day-to-day? Who benefits?"
+      placeholder: |
+        1. As a user who [...]
+        2. When I'm trying to [...]
+        3. This would help me [...]
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: "Alternatives considered"
+      description: "Any alternative solutions or workarounds you've tried."
+      placeholder: "Workarounds, similar features in other apps, etc."
+
+  - type: textarea
+    id: mockups
+    attributes:
+      label: "Mockups / Screenshots"
+      description: "If applicable, add mockups, sketches, or screenshots from other apps that illustrate the request."
+      placeholder: "Provide URLs or drag-and-drop images after creating the issue."
+
+  - type: input
+    id: app_version
+    attributes:
+      label: "App Version"
+      description: "The current version you're using (helps us understand existing context)"
+      placeholder: v0.0.0
+
+  - type: input
+    id: device_info
+    attributes:
+      label: "Device Info"
+      description: "Open the OS settings app to find which model you have"
+      placeholder: iPhone 6, Pixel 8, Desktop, ...
+
+  - type: input
+    id: os_version
+    attributes:
+      label: "OS Version"
+      description: "The OS version where this feature would apply (if platform-specific)"
+      placeholder: Windows 10, iOS 14.4, Tizen 5.0, ...
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: "Additional context"
+      description: "Any other context, references, or links related to the feature request (optional)"
