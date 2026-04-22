@@ -1,0 +1,102 @@
+const platform = (value) => `###.+Platform\\s+${value}\\s+###`;
+const name = (name) => platform(`${name}.*`);
+const variant = (suffix) => platform(`.+${suffix}`);
+
+const LABELS_MAP = [
+    {
+        pattern: name('All Platforms'),
+        label: 'all-platforms',
+    },
+    {
+        pattern: name('Android TV'),
+        label: 'android-tv',
+    },
+    {
+        pattern: name('Android Mobile'),
+        label: 'android-mobile',
+    },
+    {
+        pattern: name('iOS'),
+        label: 'apple-ios',
+    },
+    {
+        pattern: name('tvOS'),
+        label: 'apple-tv',
+    },
+    {
+        pattern: name('visionOS'),
+        label: 'visionOS',
+    },
+    {
+        pattern: name('macOS'),
+        label: 'apple-mac',
+    },
+    {
+        pattern: name('Web'),
+        label: 'web',
+    },
+    {
+        pattern: name('Windows'),
+        label: 'windows',
+    },
+    {
+        pattern: name('Linux'),
+        label: 'linux',
+    },
+    {
+        pattern: name('Samsung TV'),
+        label: 'smart-tv',
+    },
+    {
+        pattern: name('LG TV'),
+        label: 'smart-tv',
+    },
+    {
+        pattern: name('Hisense TV'),
+        label: 'smart-tv',
+    },
+    {
+        pattern: name('Raspberry Pi'),
+        label: 'rpi',
+    },
+    {
+        pattern: name('Steam Deck'),
+        label: 'steam-deck',
+    },
+    {
+        pattern: variant('VR'),
+        label: 'vr',
+    },
+    {
+        pattern: variant('Beta'),
+        label: 'beta',
+    },
+];
+
+module.exports = async ({ github, context }) => {
+    const { owner, repo } = context.repo;
+    const { body, number: issue_number, labels } = context.payload.issue;
+
+    const oldLabels = labels.map(({ name }) => name);
+
+    const newLabels = LABELS_MAP
+        .filter(({ pattern }) => RegExp(pattern, 'i').test(body))
+        .map(({ label }) => label);
+
+    if (JSON.stringify(oldLabels) !== JSON.stringify(newLabels)) {
+        await github.rest.issues.removeAllLabels({
+            owner,
+            repo,
+            issue_number,
+        });
+
+        if (newLabels.length > 0) {
+            await github.rest.issues.addLabels({
+                owner,
+                repo,
+                issue_number,
+                labels: newLabels,
+            });
+        }
+    }
+};

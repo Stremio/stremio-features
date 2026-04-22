@@ -28,6 +28,7 @@ body:
         - Steam Deck
         - iOS / iPadOS / macOS Native Beta
         - tvOS Beta
+        - visionOS Beta
     validations:
       required: true
 
